@@ -1,0 +1,61 @@
+#include <iostream>
+using namespace std;
+
+template<int M, int KG, int S, int A, int K, int Mol, int Cand>
+class DimQ
+{
+private:
+    double a;
+public:
+    DimQ(double a)
+    {
+        cout <<" Create new object: " << endl;
+        cin >> a;
+    }
+    DimQ operator -(){
+        return DimQ(-a);
+    }
+    template<int M, int KG, int S, int A, int K, int Mol, int Cand>
+    DimQ<M,KG,S,A,K,Mol,Cand> operator +(const DimQ<M,KG,S,A,K,Mol,Cand> &b)
+    {
+        double q=a+b.a;
+        return DimQ<M,KG,S,A,K,Mol,Cand>(q);
+    }
+    template<int M, int KG, int S, int A, int K, int Mol, int Cand>
+    DimQ<M,KG,S,A,K,Mol,Cand> operator -(const DimQ<M,KG,S,A,K,Mol,Cand> &b)
+    {
+        double q=a-b.a;
+        return DimQ<M,KG,S,A,K,Mol,Cand>(q);
+    }
+    template<int M, int KG, int S, int A, int K, int Mol, int Cand>
+    DimQ<M,KG,S,A,K,Mol,Cand> operator *(const DimQ<M,KG,S,A,K,Mol,Cand> &b)
+    {
+        double q=a*b.a;
+        return DimQ<M,KG,S,A,K,Mol,Cand+M,KG,S,A,K,Mol,Cand>(q);
+    }
+    template<int M, int KG, int S, int A, int K, int Mol, int Cand>
+    DimQ<M,KG,S,A,K,Mol,Cand> operator /(const DimQ<M1,KG1,S,A,K,Mol,Cand> &b)
+    {
+        double q=a/b.a;
+        return DimQ<M,KG,S,A,K,Mol,Cand-M1,KG1,S,A,K,Mol,Cand>(q);
+    }
+    template<int M, int KG, int S, int A, int K, int Mol, int Cand>
+    DimQ <M,KG,S,A,K,Mol,Cand> operator <<()
+    {
+        {
+            cout <<a,"m^",M,"*","kg^",KG,"*","S",S,"*"
+        }
+
+    }
+};
+
+typedef DimQ <1,0,0,0,0,0,0> Length;
+typedef DimQ <0,1,0,0,0,0,0> Mass;
+typedef DimQ <0,0,1,0,0,0,0> Time;
+typedef DimQ <0,0,0,1,0,0,0> Electric_current;
+typedef DimQ <0,0,0,0,1,0,0> Abs_Temperature;
+typedef DimQ <0,0,0,0,0,1,0> Substance_amount;
+typedef DimQ <0,0,0,0,0,0,1> Luminous_intensity;
+typedef DimQ <1,0,-1,0,0,0,0> Velocity;
+typedef DimQ <1,0,-2,0,0,0,0> Acceleration;
+typedef DimQ <0,0,0,0,0,0,0> No_dim_value;
