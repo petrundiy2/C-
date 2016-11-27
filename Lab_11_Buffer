@@ -38,7 +38,7 @@ public:
     // Кол-во элементов в буфере
     size_t size() const
     {
-        return arr.size;
+        return arr.size();
     }
 
     // Ёмкость буфера
@@ -56,7 +56,7 @@ public:
             std::cout<<arr[x]<<std::endl;
         }
     }
-    T operator[](const int &i)
+    t operator[](const int &i)
     {
         return arr[i];
     }
