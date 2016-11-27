@@ -1,84 +1,69 @@
 #include <iostream>
-template <class t>
+#include <vector>
+template <class t, int s=1>
 class CircularBuffer
 {
 public:
 
-    CircularBuffer( int size )
+    CircularBuffer()
     {
-        head = tail = length = 0;
-        bufferSize = size;
-        arr = new int[bufferSize];
-    }
-
-    ~CircularBuffer()
-    {
-        delete[] arr;
+        head = tail = 0;
+        arr.reserve(s);
     }
 
     // Добавить элемент
     void put( const t & value )
     {
-        if ( tail == bufferSize )
+        if ( tail == arr.size() )
         {
             tail = 0;
         }
-
-        arr[tail] = value;
         ++tail;
-        ++length;
+        arr.push_back(value);
     }
 
 
     // Извлечь последний элемент
     t & pop()
     {
-        if ( head == bufferSize ) {
+        if ( head == arr.size() ) {
             head = 0;
         }
         t & elem = arr[head];
         ++head;
-        --length;
+        arr.pop_back();
         return elem;
     }
 
     // Кол-во элементов в буфере
     size_t size() const
     {
-        return length;
+        return arr.size;
     }
 
     // Ёмкость буфера
     size_t capacity() const
     {
-        return bufferSize;
+        return arr.capacity();
     }
     //PrintBuffer_method
-    void printBuffer(int x)
+    void printBuffer()
     {
         std::cout<< head <<std::endl;
         std::cout<< tail <<std::endl;
-        for (x=0;x<size();x++)
+        for (int x=0;x<arr.size();x++)
         {
             std::cout<<arr[x]<<std::endl;
         }
     }
-    CircularBuffer operator[](const int &i, int x)
+    T operator[](const int &i)
     {
-        for (x=0; x<size(); x++)
-        {
-            if (x == i)
-            {
-                return arr[i];
-            }
-        }
+        return arr[i];
     }
 
 
 private:
-    int * arr;             // массив-буфер
-    int bufferSize;        // размер буфера
-    int length;            // кол-во элементов в буффере
+    std::vector <t> arr;             // массив-буфер
     int head;              // индекс первого элемента
     int tail;              // индекс последнего элемента
 };
@@ -86,12 +71,11 @@ private:
 
 int main()
 {
-    CircularBuffer <int> buf(3);
+    CircularBuffer <int, 3> buf;
 
     for( int i = 0; i < 10; ++i )
     {
         buf.put( i * 2 );
-        buf.printBuffer(0);
         if ( buf.size() == buf.capacity() ) {
             std::cout << "---------------" << std::endl;
             while( buf.size() ) {
