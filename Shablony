@@ -15,35 +15,34 @@ public:
     DimQ operator -(){
         return DimQ(-a);
     }
-    template<int M, int KG, int S, int A, int K, int Mol, int Cand>
-    DimQ<M,KG,S,A,K,Mol,Cand> operator +(const DimQ<M,KG,S,A,K,Mol,Cand> &b)
+    template<int M1, int KG1, int S1, int A1, int K1, int Mol1, int Cand1>
+    DimQ<M,KG,S,A,K,Mol,Cand> operator +(const DimQ<M1,KG1,S1,A1,K1,Mol1,Cand1> &b)
     {
         double q=a+b.a;
         return DimQ<M,KG,S,A,K,Mol,Cand>(q);
     }
-    template<int M, int KG, int S, int A, int K, int Mol, int Cand>
-    DimQ<M,KG,S,A,K,Mol,Cand> operator -(const DimQ<M,KG,S,A,K,Mol,Cand> &b)
+    template<int M1, int KG1, int S1, int A1, int K1, int Mol1, int Cand1>
+    DimQ<M,KG,S,A,K,Mol,Cand> operator -(const DimQ<M1,KG1,S1,A1,K1,Mol1,Cand1> &b)
     {
         double q=a-b.a;
         return DimQ<M,KG,S,A,K,Mol,Cand>(q);
     }
-    template<int M, int KG, int S, int A, int K, int Mol, int Cand>
-    DimQ<M,KG,S,A,K,Mol,Cand> operator *(const DimQ<M,KG,S,A,K,Mol,Cand> &b)
+    template<int M1, int KG1, int S1, int A1, int K1, int Mol1, int Cand1>
+    DimQ<M,KG,S,A,K,Mol,Cand> operator *(const DimQ<M1,KG1,S1,A1,K1,Mol1,Cand1> &b)
     {
         double q=a*b.a;
-        return DimQ<M,KG,S,A,K,Mol,Cand+M,KG,S,A,K,Mol,Cand>(q);
+        return DimQ<M,KG,S,A,K,Mol,Cand+M1,KG1,S1,A1,K1,Mol1,Cand1>(q);
     }
-    template<int M, int KG, int S, int A, int K, int Mol, int Cand>
-    DimQ<M,KG,S,A,K,Mol,Cand> operator /(const DimQ<M1,KG1,S,A,K,Mol,Cand> &b)
+    template<int M1, int KG1, int S1, int A1, int K1, int Mol1, int Cand1>
+    DimQ<M,KG,S,A,K,Mol,Cand> operator /(const DimQ<M1,KG1,S1,A1,K1,Mol1,Cand1> &b)
     {
         double q=a/b.a;
-        return DimQ<M,KG,S,A,K,Mol,Cand-M1,KG1,S,A,K,Mol,Cand>(q);
+        return DimQ<M,KG,S,A,K,Mol,Cand-M1,KG1,S1,A1,K1,Mol1,Cand1>(q);
     }
-    template<int M, int KG, int S, int A, int K, int Mol, int Cand>
     DimQ <M,KG,S,A,K,Mol,Cand> operator <<()
     {
         {
-            cout <<a,"m^",M,"*","kg^",KG,"*","S",S,"*"
+            cout <<a,"m^",M,"*","kg^",KG,"*","S",S,"*","A^",A,"*K^",K,"*Mol^",Mol,"*Cand^",Cand
         }
 
     }
